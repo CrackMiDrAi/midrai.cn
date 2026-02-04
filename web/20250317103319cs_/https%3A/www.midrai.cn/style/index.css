@@ -1,0 +1,259 @@
+:root {
+  --bg-color: #f1f1f1;
+  --text-color: #2f2f2f;
+  --action-color: #0083ff;
+}
+
+html, body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  overflow: hidden;
+  overflow-y: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", STHeiti, "Microsoft YaHei", SimSun, sans-serif;
+  justify-content: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+body {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  color: var(--action-color);
+}
+
+.warning {
+  position: fixed;
+  top: 0%;
+  width: calc(100% - 1.2em * 2);
+  max-width: 500px;
+  margin: 1.2em;
+  padding: 0.8em 1.2em;
+  color: #dfdfdf;
+  background-color: #b70000ba;
+  border: 4px solid #ff0000;
+  border-radius: 18px;
+  transform: translateY(calc(-100% - 1.6em));
+  opacity: 0;
+  box-sizing: border-box;
+  pointer-events: none;
+  transition: transform 1s cubic-bezier(0, 0, 0.25, 1),
+    opacity 1s linear;
+}
+.warning.show {
+  transform: translateY(0%);
+  opacity: 1;
+  pointer-events: auto;
+}
+.warning .title {
+  font-size: 1.6em;
+  font-weight: 600;
+}
+.warning .title .close {
+  color: var(--text-color);
+  text-align: right;
+  float: right;
+  cursor: pointer;
+}
+.warning .content {
+  margin-top: 0.6em;
+  font-size: 1em;
+}
+.warning .content p:first-child {
+  margin-top: 0;
+}
+.warning .content p:last-child {
+  margin-bottom: 0.2em;
+}
+
+.app {
+  display: flex;
+  padding: 1.2em;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.8em;
+}
+
+.app .logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.app .logo img {
+  width: 300px;
+  height: 300px;
+}
+.app .logo img.light {
+  display: block;
+}
+.app .logo img.dark {
+  display: none;
+}
+
+.app .title {
+  text-align: center;
+}
+.app .title h1 {
+  margin-top: 0;
+  margin-bottom: 0.2em;
+  font-size: 3em;
+}
+.app .title h2 {
+  margin-top: 0;
+  margin-bottom: 0.4em;
+  font-size: 1.6em;
+  font-weight: 400;
+}
+
+.app .list {
+  display: block;
+  max-width: calc(100vw - 1.2em);
+  font-size: 1.2em;
+  overflow-x: auto;
+}
+.app .list table {
+  width: 100%;
+}
+.app .list table th {
+  padding: 0 0.8em 0.2em 0.8em;
+  text-align: center;
+}
+.app .list table td {
+  padding: 0em 0.4em 0.2em 0.4em;
+  text-align: center;
+}
+.app .list table i {
+  margin-right: 0.2em;
+}
+.app .list table i.loading {
+  animation: loading 1s linear infinite;
+}
+.app .list table a.download {
+  margin: 0 0.2em;
+}
+.app .list table a.download:first-child {
+  margin-left: 0;
+}
+.app .list table a.download:last-child {
+  margin-right: 0;
+}
+
+.app .actions {
+  display: flex;
+  margin-top: 0.4em;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  gap: 1em;
+}
+.app .actions .action {
+  display: inline-block;
+  position: relative;
+  padding: 0.6em 1.2em;
+  color: var(--action-color);
+  border: 1px solid var(--action-color);
+  border-radius: 2em;
+  outline: none;
+  background-color: transparent;
+  font-size: 1.2em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.app .actions .action i {
+  margin-right: 0.4em;
+}
+.loaded .app .actions .action {
+  transition: border .1s linear, background-color .2s linear, color .2s linear;
+}
+.app .actions .action:hover {
+  border: 1px solid transparent;
+  color: #dfdfdf;
+  background-color: var(--action-color);
+}
+
+.app .actions .action.list .list-items {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  min-width: 100%;
+  padding: 0.6em 0.8em;
+  margin-bottom: 0.8em;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  border-radius: 18px;
+  box-shadow: 0px 0px 16px 4px var(--shadow-color);
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateX(-50%);
+  pointer-events: none;
+
+  --shadow-color: #9b9b9b;
+}
+.app .actions .action.list .list-items::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border: 0.6em solid;
+  border-color: var(--bg-color) transparent transparent transparent;
+  transform: translateX(-50%);
+}
+.loaded .app .actions .action.list .list-items {
+  transition: opacity .1s linear;
+}
+.app .actions .action.list:hover .list-items {
+  color: var(--text-color);
+  opacity: 1;
+  pointer-events: auto;
+}
+.app .actions .action.list .list-items .list-item {
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
+
+
+@keyframes loading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/*
+     FILE ARCHIVED ON 08:05:18 Dec 27, 2024 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 10:32:59 Feb 04, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.835
+  exclusion.robots: 0.032
+  exclusion.robots.policy: 0.014
+  esindex: 0.016
+  cdx.remote: 69.103
+  LoadShardBlock: 305.433 (3)
+  PetaboxLoader3.resolve: 217.056 (4)
+  PetaboxLoader3.datanode: 187.648 (4)
+  load_resource: 169.098
+*/
